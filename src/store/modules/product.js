@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const state = {
     products : []
 }
@@ -21,9 +23,18 @@ const actions = {
     initApp({commit}){
         // Vue Resource İşlemleri...
     },
-    saveProduct({ commit }, payload){
+    saveProduct({ commit , state}, product){
         // Vue Resource İşlemleri...
-        
+        Vue.http.post("https://urun-islemleri-uygulamasi1-default-rtdb.firebaseio.com/products.json" ,product)
+        .then((response) => {
+
+                        // Ürün Listesinin Güncellenmesi
+            
+            product.key = response.body.name;
+            commit("updateProductList",product)
+
+            // 
+        })
     },
     sellProduct({commit},payload){
         // Vue Resource İşlemleri...

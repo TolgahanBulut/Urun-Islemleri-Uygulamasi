@@ -23,7 +23,7 @@
                                 class="form-control"></textarea>
                     </div>
                     <hr>
-                    <button class="btn btn-primary">Kaydet</button>
+                    <button class="btn btn-primary" @click="saveProduct">Kaydet</button>
                 </div>
             </div>
         </div>
@@ -39,6 +39,11 @@ export default {
                 price : null,
                 description : ""
             }
+        }
+    },
+    methods : {
+        saveProduct(){
+            this.$store.dispatch("saveProduct", this.product)
         }
     }
 }
