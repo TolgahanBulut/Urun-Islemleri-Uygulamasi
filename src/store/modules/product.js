@@ -23,7 +23,7 @@ const actions = {
     initApp({commit}){
         // Vue Resource İşlemleri...
     },
-    saveProduct({ commit , state}, product){
+    saveProduct({dispatch, commit , state}, product){
         // Vue Resource İşlemleri...
         Vue.http.post("https://urun-islemleri-uygulamasi1-default-rtdb.firebaseio.com/products.json" ,product)
         .then((response) => {
@@ -33,7 +33,16 @@ const actions = {
             product.key = response.body.name;
             commit("updateProductList",product)
 
-            // 
+            /************ Alış , Satış, Bakiye Bilgilerinin Güncellenmesi */
+
+            let tradeResult = {
+                purchase : product.price,
+                sale : 0,
+                count : product.count
+            }
+
+            dispatch("setTradeResult", tradeResult)
+
         })
     },
     sellProduct({commit},payload){
