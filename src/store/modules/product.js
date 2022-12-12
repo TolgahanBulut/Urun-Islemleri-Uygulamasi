@@ -25,7 +25,7 @@ const actions = {
     },
     saveProduct({dispatch, commit , state}, product){
         // Vue Resource İşlemleri...
-        Vue.http.post("https://urun-islemleri-uygulamasi1-default-rtdb.firebaseio.com/products.json" ,product)
+        Vue.http.post("https://urun-islemleri-uygulamas-aa333-default-rtdb.firebaseio.com/products.json" ,product)
         .then((response) => {
 
                         // Ürün Listesinin Güncellenmesi
