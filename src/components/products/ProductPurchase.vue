@@ -23,7 +23,7 @@
                                 class="form-control"></textarea>
                     </div>
                     <hr>
-                    <button class="btn btn-primary" @click="saveProduct">Kaydet</button>
+                    <button class="btn btn-primary" :disabled="saveEnable" @click="saveProduct">Kaydet</button>
                 </div>
             </div>
         </div>
@@ -37,14 +37,48 @@ export default {
                 title : "",
                 count : null,
                 price : null,
-                description : ""
+                description : "",
+                saveButtonClick : false
             }
         }
     },
     methods : {
         saveProduct(){
+            this.saveButtonClick = true;
             this.$store.dispatch("saveProduct", this.product)
         }
+    },
+
+     computed : {
+
+        //  Kaydet butonunun etkin olup olmaması
+
+        saveEnable(){
+            if(this.product.title.length > 0 &&
+               this.product.description.length >0 &&
+               this.product.count > 0 &&
+               this.product.price > 0){
+                return false;
+            } else {
+                return true ;
+            }
+        }
+    },
+
+
+    // Kaydet Dedikten Sonra Başka Bir Sayfaya Yönlendirilme Koşullarını Sağlama
+    
+
+    beforeRouteLeave (to, from, next) {
+        if((this.product.title.length > 0 || this.product.description.length > 0 || this.product.count > 0 || this.product.price > 0) && !this.saveButtonClick){
+                if(confirm("Kaydedilmemiş Veriler Var ! Yine de Çıkmak İstiyor Musun ?")){
+                    next()
+                } else {
+                    next(false)
+                }
+            }else {
+                next()
+            }
     }
 }
 </script>

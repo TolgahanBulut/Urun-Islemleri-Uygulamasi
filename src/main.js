@@ -6,6 +6,8 @@ import VueResource from "vue-resource"
 
   Vue.use(VueResource);
 
+
+  // Alış , Satış , Bakiye verilerinin Yazım Şeklini Düzeltmek ve TL Simgesi Ekleme
   Vue.filter("currency" , (value)=> {
     return parseFloat(value).toLocaleString(undefined, {minimumFractionDigits : 2}) + " ₺"
   })

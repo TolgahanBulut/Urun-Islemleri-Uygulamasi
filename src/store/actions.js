@@ -1,6 +1,7 @@
 import Vue from "vue"
 
 export const setTradeResult  = ({state, commit}, tradeResult) => {
+    // Fiyat Bilgilerinin Obje Şeklinde Firebase'e Gönderilme İşlemi
     commit("updateTradeResult",tradeResult);
     let tradeData = {
         purchase : state.purchase,
@@ -11,6 +12,8 @@ export const setTradeResult  = ({state, commit}, tradeResult) => {
 }
 
 export const getTradeResult = ({commit}) => {
+    // Fiyat Bilgilerinin Firebase'den Getirip Footer Kısmında Gözükmesini Sağlama
+
     Vue.http.get("https://urun-islemleri-uygulamas-aa333-default-rtdb.firebaseio.com/trade-result.json")
     .then(response => {
         commit("updateTradeResult" , response.body)

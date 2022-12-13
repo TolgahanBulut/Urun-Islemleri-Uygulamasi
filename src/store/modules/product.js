@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { router } from "../../router";
 
 const state = {
     products : []
@@ -15,6 +16,9 @@ const getters = {
 
 const mutations = {
     updateProductList(state,product){
+        
+        // Uyuglamadan Gelen Product İçerisindeki Bilgileri Listelenmesi İçin Pushlama
+
         state.products.push(product)
     }
 }
@@ -24,7 +28,7 @@ const actions = {
         // Vue Resource İşlemleri...
     },
     saveProduct({dispatch, commit , state}, product){
-        // Vue Resource İşlemleri...
+        // Verileri Firebase'e Göndermek
         Vue.http.post("https://urun-islemleri-uygulamas-aa333-default-rtdb.firebaseio.com/products.json" ,product)
         .then((response) => {
 
@@ -42,6 +46,11 @@ const actions = {
             }
 
             dispatch("setTradeResult", tradeResult)
+
+            // Kaydet Dedikten Sonra Anasayfaya Dönmeyi Sağlamak
+
+            router.replace("/");
+
 
         })
     },
