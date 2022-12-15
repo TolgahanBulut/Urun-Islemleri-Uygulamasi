@@ -19,12 +19,18 @@ export default {
 
   created(){
     this.$store.dispatch("getTradeResult")
+    this.$store.dispatch("initApp")
   }
   
 }
 </script>
 
 <style>
+
+body {
+  background-color: #a7a0bb5c;
+}
+
 .fade-enter{
   opacity: 0;
 }

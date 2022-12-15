@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+         <div class="loading" :style="isLoading">
+            <div class="lds-ripple">
+                <div></div>
+                <div></div>
+            </div>
+         </div>
         <div class="row">
             <div class="col-6 offset-3 pt-3 card mt-5 shadow">
                 <div class="card-body">
@@ -37,9 +43,10 @@ export default {
                 title : "",
                 count : null,
                 price : null,
-                description : "",
-                saveButtonClick : false
-            }
+                description : ""
+            },
+            saveButtonClick : false
+
         }
     },
     methods : {
@@ -61,6 +68,20 @@ export default {
                 return false;
             } else {
                 return true ;
+            }
+        },
+
+        // Kaydet butonuna bastıktan sonra loading ekranın gelmesini sağlama
+        isLoading(){
+            if(this.saveButtonClick){
+                return {
+                    display : "block"
+                }
+            }else {
+                return {
+                    display : "none"
+                }
+
             }
         }
     },

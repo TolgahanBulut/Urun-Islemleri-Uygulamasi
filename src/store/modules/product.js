@@ -25,7 +25,19 @@ const mutations = {
 
 const actions = {
     initApp({commit}){
-        // Vue Resource İşlemleri...
+       // Firebase'den ProductList Getirme
+
+       Vue.http.get("https://urun-islemleri-uygulamas-aa333-default-rtdb.firebaseio.com/products.json")
+       .then(response => {
+        console.log(response.body)
+
+        let data = response.body;
+        for(let key in data){
+            // datanın içerisindeki gelicek olan key değerini datadaki key'den al
+            data[key].key = key;
+            commit("updateProductList",data[key])
+        }
+       })
     },
     saveProduct({dispatch, commit , state}, product){
         // Verileri Firebase'e Göndermek
