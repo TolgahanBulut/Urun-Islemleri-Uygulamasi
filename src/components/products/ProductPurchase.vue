@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label>Fiyat</label>
-                        <input v-model="product.price" type="number" class="form-control" placeholder="Ürün fiyatı giriniz..">
+                        <input v-model="product.price" type="number" class=" form-control " placeholder="Ürün fiyatı giriniz..">
                     </div>
                     <div class="form-group">
                         <label>Açıklama</label>
@@ -30,6 +30,7 @@
                     </div>
                     <hr>
                     <button class="btn btn-primary" :disabled="saveEnable" @click="saveProduct">Kaydet</button>
+                    
                 </div>
             </div>
         </div>
@@ -103,4 +104,5 @@ export default {
     }
 }
 </script>
-<style></style>
+<style>
+</style>
