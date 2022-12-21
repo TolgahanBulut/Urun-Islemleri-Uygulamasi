@@ -68,8 +68,34 @@ const actions = {
 
         })
     },
-    sellProduct({commit},payload){
-        // Vue Resource İşlemleri...
+    sellProduct({ state , commit , dispatch },payload){
+
+        // pass by referance
+        // pass by value...
+
+        let product = state.products.filter(element => {
+            return element.key == payload.key;
+        })
+
+        if (product){
+            
+            let totalCount = product[0].count - payload.count;
+            Vue.http.patch("https://urun-islemleri-uygulamas-aa333-default-rtdb.firebaseio.com/products/" + payload.key + ".json" , {count : totalCount})
+            .then(response => {
+                product[0].count = totalCount;
+                let tradeResult = {
+                    purchase : 0,
+                    sale : product[0].price,
+                    count : payload.count
+                }
+    
+                dispatch("setTradeResult", tradeResult)
+    
+                // Kaydet Dedikten Sonra Anasayfaya Dönmeyi Sağlamak
+    
+                router.replace("/");
+            })
+        }
     }
     
 }
